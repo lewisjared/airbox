@@ -3,11 +3,11 @@ import json
 import logging
 import sys
 from os import environ
-from os.path import exists
+from os.path import exists, abspath
 
 from airbox.backups import run_instr_backup
 
-logger = logging.Logger('run_backups')
+logger = logging.getLogger('run_backups')
 
 
 def load_config(config_fname):
@@ -15,12 +15,13 @@ def load_config(config_fname):
         logger.critical(
             'No configuration file specified. Use `--config` option or `AIRBOX_CONFIG` environment variable')
         sys.exit(1)
-
+    fname = abspath(config_fname)
+    logger.info('Using configuration file: {}'.format(fname))
     if not exists(config_fname):
-        logger.critical('Could not find config file ' + config_fname)
+        logger.critical('Could not find config file ' + fname)
         sys.exit(1)
 
-    config = json.load(open(config_fname))
+    config = json.load(open(fname))
     assert 'nodes' in config
     assert 'instruments' in config
 
