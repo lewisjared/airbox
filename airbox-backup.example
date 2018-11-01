@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Cron job for automatically running the backups for AirBox
+
+#
+ROOT_DIR=/home/airbox/code/airbox_backups
+
+# The name of the configuration file to use. 
+# This file should be in $(ROOT_DIR)/config
+CONFIG_FILENAME=airbox_config_v1.json
+
+echo "Starting backup routine using $CONFIG_FILENAME"
+cat $ROOT_DIR/config/$CONFIG_FILENAME
+echo "=================================="
+airbox --config $ROOT_DIR/config/$CONFIG_FILENAME

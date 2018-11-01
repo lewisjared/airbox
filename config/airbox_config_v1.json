@@ -1,0 +1,21 @@
+{
+  "target": "/mnt/aurora/data/v1/raw",
+  "nodes": [
+    {
+      "name":  "ozone",
+      "ip":  "147.66.74.70",
+      "user": "CAC",
+      "pass": "gone-fishing"
+    }
+  ],
+  "instruments": [
+    {
+      "name": "Ozone",
+      "node": "ozone",
+      "mount_name": "iPort",
+      "paths": [
+        "*.dat"
+      ]
+    }
+  ]
+}
