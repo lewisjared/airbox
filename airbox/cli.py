@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import sys
+from os import environ
 from os.path import exists
 
 from airbox.backups import run_instr_backup
@@ -10,6 +11,11 @@ logger = logging.Logger('run_backups')
 
 
 def load_config(config_fname):
+    if config_fname is None:
+        logger.critical(
+            'No configuration file specified. Use `--config` option or `AIRBOX_CONFIG` environment variable')
+        sys.exit(1)
+
     if not exists(config_fname):
         logger.critical('Could not find config file ' + config_fname)
         sys.exit(1)
@@ -34,11 +40,20 @@ def load_config(config_fname):
 
 def process_args():
     parser = argparse.ArgumentParser(prog='airbox',
-                                     description='')
-    parser.add_argument('-c', '--config')
+                                     description='A utility to help with the storage and backup of AirBox data')
+    parser.add_argument('-c', '--config', help='Path to an AirBox configuration JSON file.',
+                        default=environ.get('AIRBOX_CONFIG', None))
     parser.add_argument('-v', '--verbose', action='store_true', default=False)
 
+    subparsers = parser.add_subparsers(dest='cmd')
+    backup = subparsers.add_parser('backup', help='Perform a backup of all the airbox instruments')
+
     return parser.parse_args()
+
+
+def run_backup(config, args):
+    for i in config['instruments']:
+        run_instr_backup(i, config['target'])
 
 
 def main():
@@ -47,8 +62,8 @@ def main():
 
     config = load_config(_args.config)
 
-    for i in config['instruments']:
-        run_instr_backup(i, config['target'])
+    if _args.cmd == 'backup':
+        run_backup(config, _args)
 
 
 if __name__ == '__main__':

@@ -33,12 +33,13 @@ def run_instr_backup(instr, target_dir):
     """
     Runs the backups for a single instrument
     :param instr: A dictionary containing
+    :param target_dir: The directory where the backup should be stored
     :return:
     """
     node = instr['node']
 
     # Ensure that the directory is mounted
-    source = join(ROOT_MOUNT_POINT, instr['node']['name'], instr['mount_name'])
+    source = join(ROOT_MOUNT_POINT, instr['node']['name'], instr['mount_name']) + '/'
     dest = join(target_dir, instr['name'])
     if not is_mount_point(source):
         mount_dir(node['ip'], instr['mount_name'], source, user=node['user'], passwd=node['pass'])
