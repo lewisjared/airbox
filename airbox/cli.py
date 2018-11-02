@@ -53,9 +53,15 @@ def process_args():
 
 
 def run_backup(config, args):
+    failed_instr = []
     for i in config['instruments']:
-        run_instr_backup(i, config['target'])
-
+        try:
+            run_instr_backup(i, config['target'])
+        except:
+            logger.exception('An exception occured when backing up {}'.format(i['name']))
+            failed_instr.append(i)
+    if len(failed_instr):
+        logger.error('{} instruments failed to backup. See log for more details'.format(len(failed_instr)))
 
 def main():
     _args = process_args()

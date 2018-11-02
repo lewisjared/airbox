@@ -46,12 +46,14 @@ def run_instr_backup(instr, target_dir):
         assert is_mount_point(source)
 
     logger.info('Backing up {} to {}'.format(source, dest))
+
+    p = instr['path'] if 'path' in instr else ''
     rsync_args = [
-        '-ai',
+        '-aiz',
         '--no-owner',
         '--no-group',
     ]
 
-    command_args = ['rsync', *rsync_args, source, dest]
+    command_args = ['rsync', *rsync_args, source + p, dest]
     run_command(command_args)
     subprocess.check_call(command_args)
