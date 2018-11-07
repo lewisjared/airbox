@@ -6,6 +6,7 @@ from os import environ
 from os.path import exists, abspath
 
 from airbox.backups import run_instr_backup
+from airbox.commands import initialise_commands, run_command
 
 logger = logging.getLogger('run_backups')
 
@@ -49,6 +50,9 @@ def process_args():
     subparsers = parser.add_subparsers(dest='cmd')
     backup = subparsers.add_parser('backup', help='Perform a backup of all the airbox instruments')
 
+    # Find and load all commands in airbox.commands
+    initialise_commands(subparsers)
+
     return parser.parse_args()
 
 
@@ -71,6 +75,8 @@ def main():
 
     if _args.cmd == 'backup':
         run_backup(config, _args)
+    else:
+        run_command(config, _args)
 
 
 if __name__ == '__main__':
