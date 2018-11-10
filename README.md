@@ -25,3 +25,10 @@ sudo copy airbox-backup.example /etc/cron.hourly/airbox-backup
 sudo chmod +x /etc/cron.hourly/airbox-backup
 ```
 
+
+
+## Troubleshooting
+
+If the mounts to a computer is not working try the following steps:
+* Ensure the username, password and IP address are correct.
+* In "Network and Sharing Center" > "Advanced sharing settings", ensure that "File and Printing sharing" is enabled.

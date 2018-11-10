@@ -54,6 +54,12 @@ def run_instr_backup(instr, target_dir):
         '--no-group',
     ]
 
+    if 'filter' in instr:
+        rsync_args.extend([
+            '--include="{}"'.format(instr['filter']),
+            '--exclude="*"'
+        ])
+
     command_args = ['rsync', *rsync_args, source + p, dest]
     run_command(command_args)
     subprocess.check_call(command_args)

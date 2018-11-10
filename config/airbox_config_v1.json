@@ -89,8 +89,8 @@
     {
       "name": "MiniMPL",
       "node": "minimpl",
-      "mount_name": "DATA",
-      "path": "*.mpl"
+      "mount_name": "data",
+      "filter": "*.mpl"
     },
     {
       "name": "Radon",
@@ -101,7 +101,7 @@
       "name": "WeatherStation",
       "node": "ansto",
       "mount_name": "UMB-Config",
-      "path": "*Values.txt"
+      "filter": "*Values.txt"
     },
     {
       "name": "CPC3776",
