@@ -1,3 +1,7 @@
+import matplotlib
+
+# Only use core pdf fonts to save size
+matplotlib.rcParams['pdf.use14corefonts'] = True
 from datetime import datetime
 from logging import getLogger
 
@@ -6,6 +10,7 @@ from matplotlib.ticker import FixedLocator
 
 from airbox.plotters import get_data_for_day
 from .base import BaseCommand
+from airbox.mail import sendmail
 
 logger = getLogger(__name__)
 
@@ -53,7 +58,9 @@ class BasicPlotCommand(BaseCommand):
         for a in axs:
             a.get_xaxis().grid(True, 'major')
 
-        plt.tight_layout(rect=(0,0,1,0.95))
+        plt.tight_layout(rect=(0, 0, 1, 0.95))
         plt.suptitle('Summary timeseries from Airbox for {} (UTC)'.format(d.isoformat()))
 
         plt.savefig('airbox_summary_{}.pdf'.format(d.isoformat()))
+
+        sendmail('jared.lewis@aurora.aad.gov.au', ['jared_lew@aurora.aad.gov.au'], 'Testing', "This is a testmessage", ['airbox_summary_{}.pdf'.format(d.isoformat())])
