@@ -1,8 +1,11 @@
 import subprocess
 from logging import getLogger
-from os.path import exists, join
 from os import makedirs
+from os.path import exists, join
+
+from airbox import config
 from airbox.process import run_command
+from .base import BaseCommand
 
 logger = getLogger('airbox')
 
@@ -63,3 +66,19 @@ def run_instr_backup(instr, target_dir):
     command_args = ['rsync', *rsync_args, source + p, dest]
     run_command(command_args)
     subprocess.check_call(command_args)
+
+
+class BackupCommand(BaseCommand):
+    name = 'backup'
+    help = 'Perform a backup of all the airbox instruments'
+
+    def run_backup(self):
+        failed_instr = []
+        for i in config['instruments']:
+            try:
+                run_instr_backup(i, config['target'])
+            except:
+                logger.exception('An exception occured when backing up {}'.format(i['name']))
+                failed_instr.append(i)
+        if len(failed_instr):
+            logger.error('{} instruments failed to backup. See log for more details'.format(len(failed_instr)))

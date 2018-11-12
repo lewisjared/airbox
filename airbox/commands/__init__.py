@@ -8,6 +8,7 @@ the possible commands to execute via the commandline. The commands can be called
 from logging import getLogger
 
 from airbox import config
+from .backup import BackupCommand
 from .basic_plot import BasicPlotCommand
 from .spectronus_subset import SpectronusSubsetCommand
 
@@ -15,6 +16,7 @@ logger = getLogger(__name__)
 
 # Commands are registered below
 _commands = [
+    BackupCommand(),
     BasicPlotCommand(),
     SpectronusSubsetCommand()
 ]
