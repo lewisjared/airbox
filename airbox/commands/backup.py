@@ -72,7 +72,7 @@ class BackupCommand(BaseCommand):
     name = 'backup'
     help = 'Perform a backup of all the airbox instruments'
 
-    def run_backup(self):
+    def run(self):
         failed_instr = []
         for i in config['instruments']:
             try:
