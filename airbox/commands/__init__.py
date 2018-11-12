@@ -6,12 +6,12 @@ the possible commands to execute via the commandline. The commands can be called
 """
 
 from logging import getLogger
-from .basic_plot import BasicPlotCommand
-from .spectronus_subset import  SpectronusSubsetCommand
 
+from airbox import config
+from .basic_plot import BasicPlotCommand
+from .spectronus_subset import SpectronusSubsetCommand
 
 logger = getLogger(__name__)
-
 
 # Commands are registered below
 _commands = [
@@ -25,7 +25,7 @@ def find_commands():
     Finds all the Commands in this package
     :return: List of Classes within
     """
-    #TODO: Make this actually do that. For now commands are manually registered
+    # TODO: Make this actually do that. For now commands are manually registered
     pass
 
 
@@ -41,12 +41,12 @@ def initialise_commands(parser):
         c.initialise_parser(p)
 
 
-def run_command(config, args):
+def run_command():
     """
     Attempts to run a command
     :param config: Configuration data
     :param args: Parsed commandline arguments from argparse
     """
     for c in _commands:
-        if args.cmd == c.name:
-            return c.run(config, args)
+        if config['cmd'] == c.name:
+            return c.run()

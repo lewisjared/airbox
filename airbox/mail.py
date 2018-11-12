@@ -7,11 +7,13 @@ import smtplib
 from base64 import b64encode
 from logging import getLogger
 
+from airbox import config
+
 logger = getLogger(__name__)
 
 MARKER = "AUNIQUEMARKER"
 
-HEADER_SEC = """From: <{}>
+HEADER_SEC = """From: {}
 To: {}
 Subject: {}
 MIME-Version: 1.0
@@ -51,7 +53,8 @@ def addrs_to_list(to):
     return ", ".join(['<{}>'.format(t) for t in to])
 
 
-def sendmail(from_addr, to, subject, content, attachments=None):
+def sendmail(to, subject, content, attachments=None):
+    from_addr = config['email_from']
     if attachments is None:
         attachments = []
     header = HEADER_SEC.format(from_addr, addrs_to_list(to), subject, MARKER, MARKER)

@@ -1,18 +1,18 @@
-import matplotlib
-
-# Only use core pdf fonts to save size
-matplotlib.rcParams['pdf.use14corefonts'] = True
 from datetime import datetime
 from logging import getLogger
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedLocator
 
+from airbox import config
+from airbox.mail import sendmail
 from airbox.plotters import get_data_for_day
 from .base import BaseCommand
-from airbox.mail import sendmail
 
 logger = getLogger(__name__)
+
+MESSAGE_TEMPLATE = """Find attached a summary of the measurements made by Airbox during {}.
+"""
 
 
 class BasicPlotCommand(BaseCommand):
@@ -25,6 +25,10 @@ class BasicPlotCommand(BaseCommand):
     def initialise_parser(self, subparser):
         subparser.add_argument('-d', '--date', help='Date to generate plots for. Should be formatted as YYYY-MM-DD.',
                                required=True)
+        subparser.add_argument('--send-email',
+                               help='If specified, than an email containing the plot will be sent to the list of '
+                                    'recipients specified in `email_to`',
+                               action='store_true', default=False)
 
     def plot_variable(self, df, var, units, **kwargs):
         vals = df[var].dropna()
@@ -32,12 +36,12 @@ class BasicPlotCommand(BaseCommand):
         ax = vals.plot(label=var, legend=True, **kwargs)
         ax.set_ylabel(units)
 
-    def run(self, config, args):
-        d = datetime.strptime(args.date, '%Y-%m-%d')
+    def run(self):
+        d = datetime.strptime(config['date'], '%Y-%m-%d')
         d = d.date()
 
         df = get_data_for_day(d)
-        logger.info('Loaded data for day: {}'.format(args.date))
+        logger.info('Loaded data for day: {}'.format(config['date']))
         fig, axs = plt.subplots(3, 1, sharex=True)
 
         self.plot_variable(df, 'met_pressure', 'hPa', ax=axs[0], secondary_y=True)
@@ -59,8 +63,16 @@ class BasicPlotCommand(BaseCommand):
             a.get_xaxis().grid(True, 'major')
 
         plt.tight_layout(rect=(0, 0, 1, 0.95))
-        plt.suptitle('Summary timeseries from Airbox for {} (UTC)'.format(d.isoformat()))
+        d_str = d.isoformat()
+        plt.suptitle('Summary timeseries from Airbox for {} (UTC)'.format(d_str))
 
-        plt.savefig('airbox_summary_{}.pdf'.format(d.isoformat()))
+        plt.savefig('airbox_summary_{}.pdf'.format(d_str))
 
-        sendmail('jared.lewis@aurora.aad.gov.au', ['jared_lew@aurora.aad.gov.au'], 'Testing', "This is a testmessage", ['airbox_summary_{}.pdf'.format(d.isoformat())])
+        if config['send_email']:
+            message = MESSAGE_TEMPLATE.format(d_str)
+            sendmail(
+                config['email_to'],
+                'Airbox summary for {}'.format(d_str),
+                message,
+                attachments=['airbox_summary_{}.pdf'.format(d_str)]
+            )

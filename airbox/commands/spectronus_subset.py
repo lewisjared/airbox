@@ -12,7 +12,7 @@ class SpectronusSubsetCommand(BaseCommand):
     name = 'spectronus_subset'
     help = 'Extract a subset of spectronus data'
 
-    def run(self, config, args):
+    def run(self):
         logger.info('Testing')
 
     def initialise_parser(self, subparser):

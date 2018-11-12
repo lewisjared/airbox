@@ -1,43 +1,13 @@
 import argparse
-import json
 import logging
 import sys
 from os import environ
-from os.path import exists, abspath
 
+from airbox import config
 from airbox.backups import run_instr_backup
 from airbox.commands import initialise_commands, run_command
 
 logger = logging.getLogger('run_backups')
-
-
-def load_config(config_fname):
-    if config_fname is None:
-        logger.critical(
-            'No configuration file specified. Use `--config` option or `AIRBOX_CONFIG` environment variable')
-        sys.exit(1)
-    fname = abspath(config_fname)
-    logger.info('Using configuration file: {}'.format(fname))
-    if not exists(config_fname):
-        logger.critical('Could not find config file ' + fname)
-        sys.exit(1)
-
-    config = json.load(open(fname))
-    assert 'nodes' in config
-    assert 'instruments' in config
-
-    def find_node(node_name):
-        for n in config['nodes']:
-            if n['name'] == node_name:
-                return n
-        raise ValueError('Could not find configuration for node: "{}"'.format(node_name))
-
-    # Flatten instruments.node
-    for instr in config['instruments']:
-        assert 'node' in instr
-        instr['node'] = find_node(instr['node'])
-
-    return config
 
 
 def process_args():
@@ -56,7 +26,7 @@ def process_args():
     return parser.parse_args()
 
 
-def run_backup(config, args):
+def run_backup(args):
     failed_instr = []
     for i in config['instruments']:
         try:
@@ -72,12 +42,17 @@ def main():
     _args = process_args()
     logging.basicConfig(level=logging.DEBUG if _args.verbose else logging.INFO)
 
-    config = load_config(_args.config)
+    if _args.config is None:
+        logger.critical(
+            'No configuration file specified. Use `--config` option or `AIRBOX_CONFIG` environment variable')
+        sys.exit(1)
+    config.load_config(_args.config)
+    config.load_args(_args)
 
     if _args.cmd == 'backup':
-        run_backup(config, _args)
+        run_backup(_args)
     else:
-        run_command(config, _args)
+        run_command()
 
 
 if __name__ == '__main__':
