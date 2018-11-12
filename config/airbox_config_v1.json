@@ -21,9 +21,7 @@
     },
     {
       "name": "tekran",
-      "ip": "147.66.74.100",
-      "user": "TODO",
-      "pass": "TODO"
+      "ip": "147.66.74.100"
     },
     {
       "name": "minimpl",
@@ -79,6 +77,12 @@
       "node": "spectronus",
       "mount_name": "Data",
       "path": "1810_AuroraAustralis_V1/"
+    },
+    {
+      "name": "Tekran",
+      "node": "tekran",
+      "mount_name": "HgLoggerPlus",
+      "path": "1/Aurora Australis/"
     },
     {
       "name": "MAXDOAS",
@@ -138,6 +142,24 @@
       "node": "ccn",
       "mount_name": "dmt",
       "path": "CCN Data/"
+    },
+    {
+      "name": "ACSM",
+      "node": "acsm",
+      "mount_name": "Data2",
+      "path": "CAMMPCAN/ACSM/"
+    },
+    {
+      "name": "MAAP",
+      "node": "acsm",
+      "mount_name": "Data2",
+      "path": "CAMMPCAN/MAAP/"
+    },
+        {
+      "name": "CIMS",
+      "node": "cims",
+      "mount_name": "Data",
+      "path": "V1/"
     }
   ],
   "email_from": "Jared Lewis <jared.lewis@aurora.aad.gov.au>",
