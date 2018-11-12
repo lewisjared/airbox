@@ -6,13 +6,16 @@ the possible commands to execute via the commandline. The commands can be called
 """
 
 from logging import getLogger
+from .basic_plot import BasicPlotCommand
 from .spectronus_subset import  SpectronusSubsetCommand
+
 
 logger = getLogger(__name__)
 
 
 # Commands are registered below
 _commands = [
+    BasicPlotCommand(),
     SpectronusSubsetCommand()
 ]
 

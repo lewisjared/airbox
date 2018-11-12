@@ -67,6 +67,7 @@ def run_backup(config, args):
     if len(failed_instr):
         logger.error('{} instruments failed to backup. See log for more details'.format(len(failed_instr)))
 
+
 def main():
     _args = process_args()
     logging.basicConfig(level=logging.DEBUG if _args.verbose else logging.INFO)
