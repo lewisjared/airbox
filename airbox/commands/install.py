@@ -2,6 +2,7 @@ from logging import getLogger
 
 import sys
 from os import chmod
+from os.path import abspath
 from airbox import config
 from .base import BaseCommand
 
@@ -30,10 +31,10 @@ class InstallCommand(BaseCommand):
     def run(self):
         out_fname = '/etc/cron.hourly/airbox'
         script = CRON_SCIPT.format(
-            python=sys.executable,
-            cli_script=sys.argv[0],
-            config_fname=config['config'],
-            log_file=config['log_file']
+            python=abspath(sys.executable),
+            cli_script=abspath(sys.argv[0]),
+            config_fname=abspath(config['config']),
+            log_file=abspath(config['log_file'])
         )
         logger.info('writing to {}:\n{}'.format(out_fname, script))
 
