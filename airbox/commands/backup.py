@@ -1,10 +1,9 @@
-import subprocess
 from logging import getLogger
 from os import makedirs
 from os.path import exists, join
 
 from airbox import config
-from airbox.process import run_command
+from airbox.process import run_command, FAILED_CMD_MSG
 from .base import BaseCommand
 
 logger = getLogger('airbox')
@@ -64,8 +63,31 @@ def run_instr_backup(instr, target_dir):
         ])
 
     command_args = ['rsync', *rsync_args, source + p, dest]
-    run_command(command_args)
-    subprocess.check_call(command_args)
+    res = run_command(command_args, can_ret_nonzero=True)
+    if res.returncode != 0:
+        logger.warning('rsync command returned non zero: {}'.format(res.args))
+        can_ignore = check_rsync_stderr(res.stderr)
+        if not can_ignore:
+            logger.error(FAILED_CMD_MSG.format(res.stdout.decode(), res.stderr.decode()))
+            raise OSError("Failed rsync command: {}".format(res.args))
+
+
+def check_rsync_stderr(err):
+    """
+    Checks to see if the errors in the stderr of rsync are actual errors or can be ignored.
+    :param err: stderr from an execution of rsync
+    :return: True if errors can be ignored
+    """
+    res = True
+
+    for l in err.split('\n'):
+        if not len(l):
+            continue
+        if l.endswith('Device or resource busy (16)') or l.startswith(
+                'rsync error: some files/attrs were not transferred'):
+            continue
+        return False
+    return res
 
 
 class BackupCommand(BaseCommand):
