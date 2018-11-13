@@ -83,8 +83,10 @@ def check_rsync_stderr(err):
     for l in err.split('\n'):
         if not len(l):
             continue
-        if l.endswith('Device or resource busy (16)') or l.startswith(
-                'rsync error: some files/attrs were not transferred'):
+        if l.endswith('Device or resource busy (16)'):
+            logger.warning(l)
+            continue
+        if l.startswith('rsync error: some files/attrs were not transferred'):
             continue
         return False
     return res
