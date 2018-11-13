@@ -65,17 +65,16 @@ def run_instr_backup(instr, target_dir):
     command_args = ['rsync', *rsync_args, source + p, dest]
     res = run_command(command_args, can_ret_nonzero=True)
 
-    # Count the number of lines in STDOUT - this corresponds to the number of files added/modified
-    num_files_modified = len(res.stdout.split('\n'))
-    logger.info('{} files added or modified'.format(num_files_modified))
-    logger.warning('No files have been created since last run')
-
     if res.returncode != 0:
         logger.warning('rsync command returned non zero: {}'.format(res.args))
-        can_ignore = check_rsync_stderr(res.stderr)
+        can_ignore = check_rsync_stderr(res.stderr.decode())
         if not can_ignore:
             logger.error(FAILED_CMD_MSG.format(res.stdout.decode(), res.stderr.decode()))
             raise OSError("Failed rsync command: {}".format(res.args))
+
+    # Count the number of lines in STDOUT - this corresponds to the number of files added/modified
+    num_files_modified = len(res.stdout.decode().split('\n'))
+    logger.info('{} files added or modified'.format(num_files_modified))
 
     return num_files_modified
 
