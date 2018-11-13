@@ -3,13 +3,13 @@ from os import makedirs
 from os.path import exists, join
 
 from airbox import config
+from airbox.dir import get_instr_dir
 from airbox.process import run_command, FAILED_CMD_MSG
 from .base import BaseCommand
 
 logger = getLogger('airbox')
 
 ROOT_MOUNT_POINT = '/mnt/airbox'
-TARGET_DIR = '/mnt/aurora/data/'
 
 
 def is_mount_point(dir_name):
@@ -31,18 +31,17 @@ def mount_dir(ip_or_hostname, mount_name, dest, passwd=None, **kwargs):
     logger.info('Created mount point: ' + mount_path)
 
 
-def run_instr_backup(instr, target_dir):
+def run_instr_backup(instr):
     """
     Runs the backups for a single instrument
     :param instr: A dictionary containing
-    :param target_dir: The directory where the backup should be stored
-    :return:
+    :return: The number of files modified/added by the rsync command
     """
     node = instr['node']
 
     # Ensure that the directory is mounted
     source = join(ROOT_MOUNT_POINT, instr['node']['name'], instr['mount_name']) + '/'
-    dest = join(target_dir, instr['name'])
+    dest = get_instr_dir(node['name'])
     if not is_mount_point(source):
         mount_dir(node['ip'], instr['mount_name'], source, user=node['user'], passwd=node['pass'])
         assert is_mount_point(source)
@@ -107,7 +106,7 @@ class BackupCommand(BaseCommand):
         failed_instr = []
         for i in config['instruments']:
             try:
-                num_files = run_instr_backup(i, config['target'])
+                num_files = run_instr_backup(i)
                 if num_files == 0:
                     logger.error('No files backed up. Marking instrument as failed')
                     failed_instr.append(i)

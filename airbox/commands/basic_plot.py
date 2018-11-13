@@ -1,10 +1,12 @@
 from datetime import datetime
 from logging import getLogger
+from os.path import join
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedLocator
 
 from airbox import config
+from airbox.dir import get_plot_dir
 from airbox.mail import sendmail
 from airbox.plotters import get_data_for_day
 from .base import BaseCommand
@@ -31,10 +33,13 @@ class BasicPlotCommand(BaseCommand):
                                action='store_true', default=False)
 
     def plot_variable(self, df, var, units, **kwargs):
-        vals = df[var].dropna()
-        vals.index = vals.index.time
-        ax = vals.plot(label=var, legend=True, **kwargs)
-        ax.set_ylabel(units)
+        try:
+            vals = df[var].dropna()
+            vals.index = vals.index.time
+            ax = vals.plot(label=var, legend=True, **kwargs)
+            ax.set_ylabel(units)
+        except TypeError:
+            logger.warning("No data to plot for {}".format(var))
 
     def run(self):
         d = datetime.strptime(config['date'], '%Y-%m-%d')
@@ -68,7 +73,9 @@ class BasicPlotCommand(BaseCommand):
         d_str = d.isoformat()
         plt.suptitle('Summary timeseries from Airbox for {} (UTC)'.format(d_str))
 
-        plt.savefig('airbox_summary_{}.pdf'.format(d_str))
+        fname = join(get_plot_dir(), 'airbox_summary_{}.pdf'.format(d_str))
+        plt.savefig(fname)
+        logger.info('Figure saved to {}'.format(fname))
 
         if config['send_email']:
             message = MESSAGE_TEMPLATE.format(d_str)
@@ -76,5 +83,5 @@ class BasicPlotCommand(BaseCommand):
                 config['email_to'],
                 'Airbox summary for {}'.format(d_str),
                 message,
-                attachments=['airbox_summary_{}.pdf'.format(d_str)]
+                attachments=[fname]
             )

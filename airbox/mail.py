@@ -3,6 +3,8 @@ Low level abstraction over smtplib for sending emails from the Aurora
 
 It looks like you don't need to specify passwords to send emails which simplifies things a lot
 """
+
+from os.path import basename
 import smtplib
 from base64 import b64encode
 from logging import getLogger
@@ -46,7 +48,7 @@ def encode_attachment(fname, content_type='application/pdf'):
 
     b64 = b64encode(filecontent).decode()
     # Define the attachment section
-    return ATTACHMENT_SEC.format(content_type, fname, fname, b64, MARKER)
+    return ATTACHMENT_SEC.format(content_type, basename(fname), basename(fname), b64, MARKER)
 
 
 def addrs_to_list(to):
@@ -63,7 +65,8 @@ def sendmail(to, subject, content, attachments=None):
     body = BODY_SEC.format(content, MARKER)
 
     message = header + body + "\n".join([encode_attachment(fname) for fname in attachments]) + '--'
-
+    logger.info('Sending message "{}" to {}. Total size: {}KB'.format(subject, addrs_to_list(to), len(message) / 1024))
+    logger.debug(message)
     try:
         smtp = smtplib.SMTP('smtp.aad.gov.au')
         smtp.sendmail(from_addr, to, message)

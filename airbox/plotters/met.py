@@ -2,9 +2,8 @@ from os.path import join
 
 import pandas as pd
 
+from airbox.dir import get_instr_dir
 from .base import BasePlotter
-
-'datetime'
 
 
 class MetPlotter(BasePlotter):
@@ -61,7 +60,7 @@ class MetPlotter(BasePlotter):
         :return: Pandas dataframe
         """
         fname = '{}-{:02}-{:02}Values.Txt'.format(d.year, d.month, d.day)
-        data = pd.read_csv(join('/mnt/aurora/Data/v1/raw/WeatherStation', fname), parse_dates=[0], index_col=0,
+        data = pd.read_csv(join(get_instr_dir('WeatherStation'), fname), parse_dates=[0], index_col=0,
                            names=self.columns, header=None, skiprows=5, sep=';')
 
         return data[data.index.date == d]

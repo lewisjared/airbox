@@ -3,6 +3,7 @@ from os.path import exists, join
 
 import pandas as pd
 
+from airbox.dir import get_instr_dir
 from .base import BasePlotter
 
 
@@ -29,7 +30,7 @@ class MercuryPlotter(BasePlotter):
         :param d: Date to extract
         :return: Pandas dataframe
         """
-        fname = join('/mnt/aurora/Data/v1/raw/Tekran', 'AA{}{:02}{:02}.txt'.format(str(d.year)[2:], d.month, d.day))
+        fname = join(get_instr_dir('Tekran'), 'AA{}{:02}{:02}.txt'.format(str(d.year)[2:], d.month, d.day))
         if not exists(fname):
             raise FileNotFoundError(fname)
 
