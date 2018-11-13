@@ -27,7 +27,8 @@ def process_args():
 
 def main():
     _args = process_args()
-    logging.basicConfig(level=logging.DEBUG if _args.verbose else logging.INFO)
+    logging.basicConfig(level=logging.DEBUG if _args.verbose else logging.INFO,
+                        format="%(asctime)s %(levelname)s:%(name)s:%(message)s")
 
     if _args.config is None:
         logger.critical(

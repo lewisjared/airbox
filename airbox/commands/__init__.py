@@ -10,6 +10,7 @@ from logging import getLogger
 from airbox import config
 from .backup import BackupCommand
 from .basic_plot import BasicPlotCommand
+from .install import InstallCommand
 from .spectronus_subset import SpectronusSubsetCommand
 
 logger = getLogger(__name__)
@@ -18,6 +19,7 @@ logger = getLogger(__name__)
 _commands = [
     BackupCommand(),
     BasicPlotCommand(),
+    InstallCommand(),
     SpectronusSubsetCommand()
 ]
 
