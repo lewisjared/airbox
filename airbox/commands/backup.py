@@ -64,12 +64,20 @@ def run_instr_backup(instr, target_dir):
 
     command_args = ['rsync', *rsync_args, source + p, dest]
     res = run_command(command_args, can_ret_nonzero=True)
+
+    # Count the number of lines in STDOUT - this corresponds to the number of files added/modified
+    num_files_modified = len(res.stdout.split('\n'))
+    logger.info('{} files added or modified'.format(num_files_modified))
+    logger.warning('No files have been created since last run')
+
     if res.returncode != 0:
         logger.warning('rsync command returned non zero: {}'.format(res.args))
         can_ignore = check_rsync_stderr(res.stderr)
         if not can_ignore:
             logger.error(FAILED_CMD_MSG.format(res.stdout.decode(), res.stderr.decode()))
             raise OSError("Failed rsync command: {}".format(res.args))
+
+    return num_files_modified
 
 
 def check_rsync_stderr(err):
@@ -100,7 +108,10 @@ class BackupCommand(BaseCommand):
         failed_instr = []
         for i in config['instruments']:
             try:
-                run_instr_backup(i, config['target'])
+                num_files = run_instr_backup(i, config['target'])
+                if num_files == 0:
+                    logger.error('No files backed up. Marking instrument as failed')
+                    failed_instr.append(i)
             except:
                 logger.exception('An exception occured when backing up {}'.format(i['name']))
                 failed_instr.append(i)
