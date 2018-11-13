@@ -51,7 +51,9 @@ class BasicPlotCommand(BaseCommand):
         self.plot_variable(df, 'radon_ExFlow', '', ax=axs[1])
         self.plot_variable(df, 'radon_Radon', '', ax=axs[1])
 
-        self.plot_variable(df, 'ozone_o3', 'ppb', ax=axs[2])
+        self.plot_variable(df, 'ozone_o3', 'ppb', ax=axs[2], secondary_y=True)
+        self.plot_variable(df, 'tekran_hg', 'ng/m3', ax=axs[2])
+
 
         # set up the limits of the plot. Note that the locations are defined in seconds
         plt.xlim(0, 24 * 60 * 60)

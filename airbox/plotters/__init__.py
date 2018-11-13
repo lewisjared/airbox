@@ -1,11 +1,12 @@
 import pandas as pd
 
-from .base import BasePlotter
+from .mercury import MercuryPlotter
 from .met import MetPlotter
 from .ozone import OzonePlotter
 from .radon import RadonPlotter
 
 _plotters = [
+    MercuryPlotter,
     MetPlotter,
     OzonePlotter,
     RadonPlotter
