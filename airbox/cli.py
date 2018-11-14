@@ -16,6 +16,8 @@ def process_args():
                                                'can also be specified using the "AIRBOX_CONFIG" environment variable.',
                         default=environ.get('AIRBOX_CONFIG', None))
     parser.add_argument('-v', '--verbose', action='store_true', default=False)
+    parser.add_argument('--debug', action='store_true', default=False, help="Enable debug mode which disables sending "
+                                                                            "of emails")
 
     subparsers = parser.add_subparsers(dest='cmd')
 

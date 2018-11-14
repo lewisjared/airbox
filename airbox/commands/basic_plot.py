@@ -83,19 +83,19 @@ class BasicPlotCommand(BaseCommand):
         fname = join(get_plot_dir(), 'airbox_summary_{}.pdf'.format(d_str))
         plt.savefig(fname)
         logger.info('Figure saved to {}'.format(fname))
-        created_files = [fname]
+        created_files = [('application/pdf', fname)]
 
         if config['dump_timeseries']:
             csv_fname = join(get_plot_dir(), 'airbox_summary_timeseries_{}.csv'.format(d_str))
             resampled_df = df.resample('10T').mean()
             resampled_df.to_csv(csv_fname, float_format="%.4f")
             logger.info('Dumped data to {}'.format(csv_fname))
-            created_files.append(csv_fname)
+            created_files.append(('application/csv', csv_fname))
 
         if config['send_email']:
             message = MESSAGE_TEMPLATE.format(d_str)
             sendmail(
-                config['email_to'],
+                config['email_to'] + config['email_expeditioners'],
                 'Airbox summary for {}'.format(d_str),
                 message,
                 attachments=created_files
