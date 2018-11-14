@@ -114,4 +114,6 @@ class BackupCommand(BaseCommand):
                 logger.exception('An exception occured when backing up {}'.format(i['name']))
                 failed_instr.append(i)
         if len(failed_instr):
+            # Raise an exception so an email will be sent any instruments fail to backup
             logger.error('{} instruments failed to backup. See log for more details'.format(len(failed_instr)))
+            raise ValueError('{} instruments failed to backup'.format(len(failed_instr)))

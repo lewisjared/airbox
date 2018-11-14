@@ -46,8 +46,7 @@ class RunScheduleCommand(BaseCommand):
             # Run the command
             logger.info('Running command: {}'.format(s['command']))
             try:
-                #run_command(s['command'])
-                pass
+                run_command(s['command'])
             except:
                 exc_info = sys.exc_info()
                 logger.exception('Command failed. Emailing expeds')

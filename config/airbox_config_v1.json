@@ -177,11 +177,41 @@
     {
       "command": "basic_plot",
       "frequency": "d"
-
     }
   ],
   "email_from": "Jared Lewis <jared.lewis@aurora.aad.gov.au>",
   "email_to": [
-    "jared.lewis@aurora.aad.gov.au"
-  ]
+    "robyn.schofield@unimelb.edu.au",
+    "ruhi.humphries@csiro.au",
+    "griffith@uow.edu.au",
+    "rgryan@student.unimelb.edu.au",
+    "montyjp@unimelb.edu.au",
+    "simon.alexander@aad.gov.au",
+    "john.french@aad.gov.au",
+    "alessandro.toffoli@unimelb.edu.au",
+    "clarem@uow.edu.au",
+    "andrew.bowie@utas.edu.au",
+    "michal.strzelec@utas.edu.au",
+    "z.ristovski@qut.edu.au",
+    "agw@ansto.gov.au",
+    "melita.keywood@csiro.au",
+    "b.miljevic@qut.edu.au",
+    "jared@jared.kiwi.nz",
+    "simon.alexander@aurora.aad.gov.au",
+    "agf@ansto.gov.au",
+    "szc@ansto.gov.au",
+    "ccaldow@uow.edu.au",
+    "dagmar.kubistin@gmx.de",
+    "iwadlow@student.unimelb.edu.au",
+    "jp.alroe@hdr.qut.edu.au",
+    "tony.morrison@mq.edu.au",
+    "peter.nelson@mq.edu.au",
+    "jennyf@uow.edu.au"
+  ],
+  "email_expeditioners": [
+    "jared.lewis@aurora.aad.gov.au",
+    "branka_mil@aurora.aad.gov.au"
+  ],
+  "send_email": true,
+  "dump_timeseries": true
 }
