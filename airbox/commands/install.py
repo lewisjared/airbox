@@ -14,7 +14,7 @@ CRON_SCIPT = """#!/bin/sh
 # Cron job for automatically running the backups for AirBox
 # This was installed using the airbox cli tool
 
-{python} {cli_script} --config {config_fname} backup >> {log_file}"""
+{python} {cli_script} --config {config_fname} backup >> {log_file} 2>&1"""
 
 
 class InstallCommand(BaseCommand):
