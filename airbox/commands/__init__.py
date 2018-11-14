@@ -7,10 +7,10 @@ the possible commands to execute via the commandline. The commands can be called
 
 from logging import getLogger
 
-from airbox import config
 from .backup import BackupCommand
 from .basic_plot import BasicPlotCommand
 from .install import InstallCommand
+from .run_schedule import RunScheduleCommand
 from .spectronus_subset import SpectronusSubsetCommand
 
 logger = getLogger(__name__)
@@ -20,6 +20,7 @@ _commands = [
     BackupCommand(),
     BasicPlotCommand(),
     InstallCommand(),
+    RunScheduleCommand(),
     SpectronusSubsetCommand()
 ]
 
@@ -45,12 +46,11 @@ def initialise_commands(parser):
         c.initialise_parser(p)
 
 
-def run_command():
+def run_command(cmd_name):
     """
     Attempts to run a command
     :param config: Configuration data
-    :param args: Parsed commandline arguments from argparse
     """
     for c in _commands:
-        if config['cmd'] == c.name:
+        if cmd_name == c.name:
             return c.run()

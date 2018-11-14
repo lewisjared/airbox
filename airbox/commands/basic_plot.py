@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from logging import getLogger
 from os.path import join
 
@@ -14,6 +14,8 @@ from .base import BaseCommand
 logger = getLogger(__name__)
 
 MESSAGE_TEMPLATE = """Find attached a summary of the measurements made by Airbox during {}.
+
+Contact Jared (jared.lewis@unimelb.edu.au or jared.lewis@aurora.aad.gov.au) for any suggested changes.
 """
 
 
@@ -25,11 +27,17 @@ class BasicPlotCommand(BaseCommand):
     help = 'Create a generic plot'
 
     def initialise_parser(self, subparser):
-        subparser.add_argument('-d', '--date', help='Date to generate plots for. Should be formatted as YYYY-MM-DD.',
-                               required=True)
+        yesterday = datetime.utcnow() - timedelta(days=1)
+        subparser.add_argument('-d', '--date', help='Date to generate plots for. Should be formatted as YYYY-MM-DD. '
+                                                    'Defaults to yesterday if no value is provided.',
+                               default=yesterday.date().isoformat())
         subparser.add_argument('--send-email',
                                help='If specified, than an email containing the plot will be sent to the list of '
                                     'recipients specified in `email_to`',
+                               action='store_true', default=False)
+        subparser.add_argument('--dump-timeseries',
+                               help='If specified, a CSV containing the data used to generate the plots and some '
+                                    'additional variables will be dumped to file in the `plots` directory',
                                action='store_true', default=False)
 
     def plot_variable(self, df, var, units, **kwargs):
@@ -59,7 +67,6 @@ class BasicPlotCommand(BaseCommand):
         self.plot_variable(df, 'ozone_o3', 'ppb', ax=axs[2], secondary_y=True)
         self.plot_variable(df, 'tekran_hg', 'ng/m3', ax=axs[2])
 
-
         # set up the limits of the plot. Note that the locations are defined in seconds
         plt.xlim(0, 24 * 60 * 60)
         axs[0].get_xaxis().set_major_locator(FixedLocator([x * 60 * 60 for x in range(0, 24 + 1, 6)]))
@@ -76,6 +83,14 @@ class BasicPlotCommand(BaseCommand):
         fname = join(get_plot_dir(), 'airbox_summary_{}.pdf'.format(d_str))
         plt.savefig(fname)
         logger.info('Figure saved to {}'.format(fname))
+        created_files = [fname]
+
+        if config['dump_timeseries']:
+            csv_fname = join(get_plot_dir(), 'airbox_summary_timeseries_{}.csv'.format(d_str))
+            resampled_df = df.resample('10T').mean()
+            resampled_df.to_csv(csv_fname, float_format="%.4f")
+            logger.info('Dumped data to {}'.format(csv_fname))
+            created_files.append(csv_fname)
 
         if config['send_email']:
             message = MESSAGE_TEMPLATE.format(d_str)
@@ -83,5 +98,5 @@ class BasicPlotCommand(BaseCommand):
                 config['email_to'],
                 'Airbox summary for {}'.format(d_str),
                 message,
-                attachments=[fname]
+                attachments=created_files
             )

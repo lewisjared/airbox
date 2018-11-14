@@ -1,5 +1,5 @@
 {
-  "target": "/mnt/aurora/data/v1/raw",
+  "target": "/mnt/aurora/data/v1",
   "nodes": [
     {
       "name": "ozone",
@@ -157,11 +157,27 @@
       "mount_name": "Data2",
       "path": "CAMMPCAN/MAAP/"
     },
-        {
+    {
       "name": "CIMS",
       "node": "cims",
       "mount_name": "Data",
       "path": "V1/"
+    },
+    {
+      "name": "NAIS",
+      "node": "nais",
+      "mount_name": "nais"
+    }
+  ],
+  "schedule": [
+    {
+      "command": "backup",
+      "frequency": "h"
+    },
+    {
+      "command": "basic_plot",
+      "frequency": "d"
+
     }
   ],
   "email_from": "Jared Lewis <jared.lewis@aurora.aad.gov.au>",

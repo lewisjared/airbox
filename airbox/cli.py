@@ -37,7 +37,7 @@ def main():
     config.load_config(_args.config)
     config.load_args(_args)
 
-    run_command()
+    run_command(config['cmd'])
 
 
 if __name__ == '__main__':
