@@ -4,6 +4,8 @@ import matplotlib
 matplotlib.rcParams['pdf.use14corefonts'] = True
 matplotlib.rcParams['legend.fontsize'] = 'small'
 
+__version__ = '0.1.1'
+
 from .configstore import ConfigStore
 
 config = ConfigStore()

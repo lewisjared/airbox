@@ -13,19 +13,19 @@ Although it is likely to be only installed on one computer!
 """
 
 from os.path import join, abspath, dirname
-import os
+
 from setuptools import setup, find_packages
 
-root_dir = abspath(dirname(__file__))
+from airbox import __version__
 
+root_dir = abspath(dirname(__file__))
 
 with open(join(root_dir, "README.md"), "r") as f:
     readme = f.read()
 
-
 setup(
     name="airbox",
-    version=0.1,
+    version=__version__,
     description="Set of helpers for managing AirBox",
     long_description=readme,
     author="Jared Lewis",
@@ -47,7 +47,7 @@ setup(
         # "pandas",
         # "matplotlib"
     ],
-        entry_points={
+    entry_points={
         'console_scripts':
             ['airbox = airbox.cli:main']
     },
