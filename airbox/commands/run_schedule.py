@@ -26,8 +26,8 @@ class RunScheduleCommand(BaseCommand):
     """
     Takes the last 24 hours of spectronus data, decimates it and then emails the result to Dave Griffiths.
     """
-    name = 'install'
-    help = 'Install/update the scheduler'
+    name = 'run_schedule'
+    help = 'Run the scheduler. This runs the tasks that need to be run daily or every hour'
 
     def initialise_parser(self, subparser):
         subparser.add_argument('--log-file', help="Filename where the logs from the scheduler are written. This file is"
@@ -46,7 +46,8 @@ class RunScheduleCommand(BaseCommand):
             # Run the command
             logger.info('Running command: {}'.format(s['command']))
             try:
-                run_command(s['command'])
+                #run_command(s['command'])
+                pass
             except:
                 exc_info = sys.exc_info()
                 logger.exception('Command failed. Emailing expeds')
