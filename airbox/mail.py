@@ -13,6 +13,7 @@ from airbox import config
 
 logger = getLogger(__name__)
 
+MAX_LINE_WIDTH = 76
 MARKER = "AUNIQUEMARKER"
 
 BODY_SEC = """Content-Type: text/plain
@@ -38,8 +39,15 @@ def encode_attachment(fname, content_type='application/pdf'):
     filecontent = fo.read()
 
     b64 = b64encode(filecontent).decode()
+
+    # Convert to a fixed line width
+    l = ""
+    num_lines = len(b64) // MAX_LINE_WIDTH
+    for i in range(num_lines + 1):
+        l += b64[i * MAX_LINE_WIDTH:(i + 1) * MAX_LINE_WIDTH] + '\n'
+
     # Define the attachment section
-    return ATTACHMENT_SEC.format(content_type, basename(fname), basename(fname), b64, MARKER)
+    return ATTACHMENT_SEC.format(content_type, basename(fname), basename(fname), l, MARKER)
 
 
 def generate_header(params):

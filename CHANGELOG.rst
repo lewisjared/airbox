@@ -5,6 +5,7 @@ master
 ------
 
 - Added changelog
+- Attachments are now fixed width in emails
 
 0.1.0
 -----
