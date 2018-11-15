@@ -41,7 +41,7 @@ def run_instr_backup(instr):
 
     # Ensure that the directory is mounted
     source = join(ROOT_MOUNT_POINT, instr['node']['name'], instr['mount_name']) + '/'
-    dest = get_instr_dir(node['name'])
+    dest = get_instr_dir(instr['name'])
     if not is_mount_point(source):
         mount_dir(node['ip'], instr['mount_name'], source, user=node['user'], passwd=node['pass'])
         assert is_mount_point(source)
