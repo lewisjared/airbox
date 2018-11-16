@@ -38,6 +38,7 @@ class RunScheduleCommand(BaseCommand):
         from airbox.commands import run_command
         schedules = config['schedule']
 
+        _config = config._config
         for s in schedules:
             if not should_run(s):
                 logger.info('Skipping command: {}'.format(s['command']))
@@ -46,6 +47,9 @@ class RunScheduleCommand(BaseCommand):
             # Run the command
             logger.info('Running command: {}'.format(s['command']))
             try:
+                config._config = _config.copy()
+                if 'args' in s:
+                    config._config.update(s['args'])
                 run_command(s['command'])
             except:
                 exc_info = sys.exc_info()

@@ -176,7 +176,11 @@
     },
     {
       "command": "basic_plot",
-      "frequency": "d"
+      "frequency": "d",
+      "args": {
+        "send_email": true,
+        "dump_timeseries": true
+      }
     }
   ],
   "email_from": "Jared Lewis <jared.lewis@aurora.aad.gov.au>",
@@ -211,7 +215,5 @@
   "email_expeditioners": [
     "jared.lewis@aurora.aad.gov.au",
     "branka_mil@aurora.aad.gov.au"
-  ],
-  "send_email": true,
-  "dump_timeseries": true
+  ]
 }

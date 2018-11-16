@@ -50,8 +50,13 @@ class BasicPlotCommand(BaseCommand):
             logger.warning("No data to plot for {}".format(var))
 
     def run(self):
-        d = datetime.strptime(config['date'], '%Y-%m-%d')
-        d = d.date()
+        try:
+            date = config['date']
+            d = datetime.strptime(date, '%Y-%m-%d')
+            d = d.date()
+        except KeyError:
+            yesterday = datetime.utcnow() - timedelta(days=1)
+            d = yesterday.date()
 
         df = get_data_for_day(d)
         logger.info('Loaded data for day: {}'.format(config['date']))

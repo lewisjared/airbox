@@ -6,6 +6,7 @@ master
 
 - Added changelog
 - Attachments are now fixed width in emails
+- Added `args` parameter to a scheduler
 
 0.1.0
 -----
