@@ -4,7 +4,7 @@ Changelog
 master
 ------
 
-- Read in daily Spectronus data
+- Read in daily Spectronus data and added to plots
 
 0.1.1
 -----

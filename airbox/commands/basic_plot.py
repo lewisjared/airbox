@@ -60,7 +60,7 @@ class BasicPlotCommand(BaseCommand):
 
         df = get_data_for_day(d)
         logger.info('Loaded data for day: {}'.format(config['date']))
-        fig, axs = plt.subplots(3, 1, sharex=True)
+        fig, axs = plt.subplots(5, 1, sharex=True, figsize=(6.4, 7.2))
 
         self.plot_variable(df, 'met_pressure', 'hPa', ax=axs[0], secondary_y=True)
         self.plot_variable(df, 'met_temperature', 'degC', ax=axs[0])
@@ -71,6 +71,12 @@ class BasicPlotCommand(BaseCommand):
 
         self.plot_variable(df, 'ozone_o3', 'ppb', ax=axs[2], secondary_y=True)
         self.plot_variable(df, 'tekran_hg', 'ng/m3', ax=axs[2])
+
+        self.plot_variable(df, 'spectronus_Room_Temperature_Avg', 'degC', ax=axs[3], secondary_y=True)
+        self.plot_variable(df, 'spectronus_Cell_Temperature_Avg', 'degC', ax=axs[3], secondary_y=True)
+        self.plot_variable(df, 'spectronus_Flow_In_Avg', '', ax=axs[3])
+        self.plot_variable(df, 'spectronus_Flow_Out_Avg', '', ax=axs[3])
+
 
         # set up the limits of the plot. Note that the locations are defined in seconds
         plt.xlim(0, 24 * 60 * 60)
