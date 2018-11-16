@@ -4,12 +4,14 @@ from .mercury import MercuryPlotter
 from .met import MetPlotter
 from .ozone import OzonePlotter
 from .radon import RadonPlotter
+from .spectronus import SpectronusPlotter
 
 _plotters = [
     MercuryPlotter,
     MetPlotter,
     OzonePlotter,
-    RadonPlotter
+    RadonPlotter,
+    SpectronusPlotter
 ]
 
 

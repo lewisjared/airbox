@@ -4,6 +4,8 @@ Changelog
 master
 ------
 
+- Read in daily Spectronus data
+
 0.1.1
 -----
 
