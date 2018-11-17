@@ -1,5 +1,6 @@
 import pandas as pd
 
+from .cpc import CN3Plotter, CN10Plotter
 from .mercury import MercuryPlotter
 from .met import MetPlotter
 from .ozone import OzonePlotter
@@ -7,6 +8,8 @@ from .radon import RadonPlotter
 from .spectronus import SpectronusPlotter
 
 _plotters = [
+    #CN3Plotter,
+    #CN10Plotter,
     MercuryPlotter,
     MetPlotter,
     OzonePlotter,
