@@ -5,6 +5,7 @@ master
 ------
 
 - Read in daily Spectronus data and added to plots
+- Added subset command for extracting a data for a single instrument
 
 0.1.1
 -----

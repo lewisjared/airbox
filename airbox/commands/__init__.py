@@ -12,6 +12,7 @@ from .basic_plot import BasicPlotCommand
 from .install import InstallCommand
 from .run_schedule import RunScheduleCommand
 from .spectronus_subset import SpectronusSubsetCommand
+from .subset import SubsetCommand
 
 logger = getLogger(__name__)
 
@@ -21,7 +22,8 @@ _commands = [
     BasicPlotCommand(),
     InstallCommand(),
     RunScheduleCommand(),
-    SpectronusSubsetCommand()
+    SpectronusSubsetCommand(),
+    SubsetCommand()
 ]
 
 
