@@ -85,7 +85,7 @@ def sendmail(to, subject, content, attachments=None, cc=None):
     logger.debug(message)
     if not config['debug']:
         try:
-            smtp = smtplib.SMTP('smtp.aad.gov.au')
+            smtp = smtplib.SMTP('147.66.72.6')  # smtp.aad.gov.au ip - DNS incorrectly configured on ship
             smtp.sendmail(from_addr, to, message)
         except smtplib.SMTPException:
             logger.exception('Failed to send message:\n{}'.format(message))
