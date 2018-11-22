@@ -59,7 +59,7 @@ class BasicPlotCommand(BaseCommand):
             d = yesterday.date()
 
         df = get_data_for_day(d)
-        logger.info('Loaded data for day: {}'.format(config['date']))
+        logger.info('Loaded data for day: {}'.format(d.isoformat()))
         fig, axs = plt.subplots(6, 1, sharex=True, figsize=(6.4, 8.4))
 
         self.plot_variable(df, 'met_pressure', 'hPa', ax=axs[0], secondary_y=True)

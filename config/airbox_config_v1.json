@@ -178,7 +178,6 @@
       "command": "basic_plot",
       "frequency": "d",
       "args": {
-        "send_email": true,
         "dump_timeseries": true
       }
     }
