@@ -180,6 +180,10 @@
       "args": {
         "dump_timeseries": true
       }
+    },
+    {
+      "command": "backup_sync",
+      "frequency": "d"
     }
   ],
   "email_from": "Jared Lewis <jared.lewis@aurora.aad.gov.au>",
@@ -214,5 +218,9 @@
   "email_expeditioners": [
     "jared.lewis@aurora.aad.gov.au",
     "branka_mil@aurora.aad.gov.au"
+  ],
+  "backup_dirs": [
+    "/media/aurora_ext_uom",
+    "/media/aurora_ext_aad"
   ]
 }

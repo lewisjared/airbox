@@ -8,6 +8,7 @@ the possible commands to execute via the commandline. The commands can be called
 from logging import getLogger
 
 from .backup import BackupCommand
+from .backup_sync import BackupSyncCommand
 from .basic_plot import BasicPlotCommand
 from .install import InstallCommand
 from .run_schedule import RunScheduleCommand
@@ -19,6 +20,7 @@ logger = getLogger(__name__)
 # Commands are registered below
 _commands = [
     BackupCommand(),
+    BackupSyncCommand(),
     BasicPlotCommand(),
     InstallCommand(),
     RunScheduleCommand(),
