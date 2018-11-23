@@ -18,8 +18,12 @@ def is_mount_point(dir_name):
 
 
 def mount_dir(ip_or_hostname, mount_name, dest, passwd=None, **kwargs):
-    if not exists(dest):
-        makedirs(dest)
+    try:
+        if not exists(dest):
+            makedirs(dest)
+    except FileExistsError:
+        logger.warning('os.path.exists failed for {}'.format(dest))
+
     if passwd is not None:
         kwargs['pass'] = passwd
 
