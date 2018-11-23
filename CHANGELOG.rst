@@ -4,11 +4,14 @@ Changelog
 master
 ------
 
+
+0.1.2
+-----
+
 - Read in daily Spectronus data and added to plots
 - Added subset command for extracting a data for a single instrument
 - Remove nan values from met data
-- Added backup sync command for syncronising the backups with the external drives
-    which are removed from the vessel after the voyage
+- Added backup sync command for syncronising the backups with the external drives which are removed from the vessel after the voyage
 - Added scripts for removing and reenabling the external harddrives on the aurora
 
 0.1.1
