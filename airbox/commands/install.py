@@ -1,20 +1,17 @@
-from logging import getLogger
-
 import sys
-from os import chmod
+from logging import getLogger
 from os.path import abspath
+
 from airbox import config
 from .base import BaseCommand
 
 logger = getLogger(__name__)
 
+CRON_SCIPT = """# /etc/cron.d/airbox: crontab entries for the airbox package
+# This was installed using the airbox cli tool: run `airbox install` again with a different configuration to change
 
-CRON_SCIPT = """#!/bin/sh
-
-# Cron job for automatically running the backups for AirBox
-# This was installed using the airbox cli tool
-
-{python} {cli_script} --config {config_fname} backup >> {log_file} 2>&1"""
+5 * * * *   airbox    {python} {cli_script} --config {config_fname} run_schedule >> {log_file} 2>&1
+"""
 
 
 class InstallCommand(BaseCommand):
@@ -25,25 +22,20 @@ class InstallCommand(BaseCommand):
     help = 'Install/update the scheduler'
 
     def initialise_parser(self, subparser):
-        subparser.add_argument('--log-file', help="Filename where the logs from the scheduler are written. This file is"
-                                                  " appended to every invocation", default="/var/log/airbox.log")
+        subparser.add_argument('--log-file',
+                               help="Filename where the logs from the scheduler are written. This file is appended to "
+                                    "on every invocation. This can include shell commands such as `date`. Defaults to "
+                                    '/var/log/airbox_`date "+%%Y-%%m-%%d"`.log which creates a new file every day.',
+                               default='/var/log/airbox_`date "+%Y-%m-%d"`.log')
 
     def run(self):
-        out_fname = '/etc/cron.hourly/airbox'
+        out_fname = '/etc/cron.d/airbox'
         script = CRON_SCIPT.format(
             python=abspath(sys.executable),
             cli_script=abspath(sys.argv[0]),
             config_fname=abspath(config['config']),
             log_file=abspath(config['log_file'])
         )
-        logger.info('writing to {}:\n{}'.format(out_fname, script))
+        logger.info('Write the following lines to {}. Then ensure that {} is executable'.format(out_fname, out_fname))
 
-        try:
-            with open(out_fname, 'w') as fh:
-                fh.write(script)
-
-            logger.info('Setting {} to be executable (755)'.format(out_fname))
-            chmod(out_fname, 0o755)
-            logger.info('Cron script successfully installed')
-        except PermissionError:
-            logger.exception("Cannot install cron script. Rerun command as sudo")
+        print(script)

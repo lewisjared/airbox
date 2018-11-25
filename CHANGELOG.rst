@@ -6,6 +6,9 @@ master
 
 - Shifting mountpoints to /etc/fstab rather than trying to mount them during the backups
 - Added `create_mounts` and `print_fstab` for managing the mounting of folders
+- Addded more documentation
+- Moved to a cron file in /etc/cron.d instead of /etc/cron.hourly
+- Redirect the output from `airbox install` to /etc/cron.d instead of using python
 
 0.1.2
 -----
