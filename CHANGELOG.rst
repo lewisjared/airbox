@@ -4,13 +4,16 @@ Changelog
 master
 ------
 
+0.2.0
+-----
+
 - Shifting mountpoints to /etc/fstab rather than trying to mount them during the backups
 - Added `create_mounts` and `print_fstab` for managing the mounting of folders
 - Addded more documentation
 - Moved to a cron file in /etc/cron.d instead of /etc/cron.hourly
 - Redirect the output from `airbox install` to /etc/cron.d instead of using python
 
-0.1.2
+0.1.3
 -----
 
 - Read in daily Spectronus data and added to plots
@@ -19,7 +22,7 @@ master
 - Added backup sync command for syncronising the backups with the external drives which are removed from the vessel after the voyage
 - Added scripts for removing and reenabling the external harddrives on the aurora
 
-0.1.1
+0.1.2
 -----
 
 - Added changelog
