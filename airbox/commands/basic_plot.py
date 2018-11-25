@@ -110,6 +110,8 @@ class BasicPlotCommand(BaseCommand):
             logger.info('Dumped data to {}'.format(csv_fname))
             created_files.append(('application/csv', csv_fname))
 
+        """
+        # Emailing disabled as emails sent to spam for a majority of recipients
         if config['send_email']:
             message = MESSAGE_TEMPLATE.format(d_str)
             sendmail(
@@ -118,3 +120,4 @@ class BasicPlotCommand(BaseCommand):
                 message,
                 attachments=created_files
             )
+        """

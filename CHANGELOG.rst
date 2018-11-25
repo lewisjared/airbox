@@ -4,6 +4,8 @@ Changelog
 master
 ------
 
+- Disabled of sending emails to group members outside of the ship due to emails ending up in spam
+
 0.2.0
 -----
 
