@@ -1,0 +1,158 @@
+{
+  "target": "/mnt/aurora/data/v2",
+  "instruments": [
+    {
+      "name": "Ozone",
+      "node": "ozone",
+      "mount_name": "iPort"
+    },
+    {
+      "name": "Spectronus",
+      "node": "spectronus",
+      "mount_name": "Data",
+      "path": "1810_AuroraAustralis_V2/"
+    },
+    {
+      "name": "Tekran",
+      "node": "tekran",
+      "mount_name": "HgLoggerPlus",
+      "path": "1/Aurora Australis/"
+    },
+    {
+      "name": "MAXDOAS",
+      "node": "maxdoas",
+      "mount_name": "Data",
+      "path": "v2_Oct2018/"
+    },
+    {
+      "name": "MiniMPL",
+      "node": "minimpl",
+      "mount_name": "data",
+      "filter": "*.mpl"
+    },
+    {
+      "name": "Radon",
+      "node": "ansto",
+      "mount_name": "AIRBOX"
+    },
+    {
+      "name": "WeatherStation",
+      "node": "ansto",
+      "mount_name": "UMB-Config",
+      "filter": "*Values.txt"
+    },
+    {
+      "name": "CPC3776",
+      "node": "csiro",
+      "mount_name": "Data",
+      "path": "201819_CAMMPCAN/CPC3776/"
+    },
+    {
+      "name": "CPC3772",
+      "node": "csiro",
+      "mount_name": "Data",
+      "path": "201819_CAMMPCAN/CPC3772/"
+    },
+    {
+      "name": "SMPS",
+      "node": "csiro",
+      "mount_name": "Data",
+      "path": "201819_CAMMPCAN/SMPS/"
+    },
+    {
+      "name": "Neph",
+      "node": "csiro",
+      "mount_name": "Data",
+      "path": "201819_CAMMPCAN/Neph/"
+    },
+    {
+      "name": "AerosolTempRH",
+      "node": "csiro",
+      "mount_name": "Data",
+      "path": "HMP/"
+    },
+    {
+      "name": "CCN",
+      "node": "ccn",
+      "mount_name": "dmt",
+      "path": "CCN Data/"
+    },
+    {
+      "name": "ACSM",
+      "node": "acsm",
+      "mount_name": "Data2",
+      "path": "CAMMPCAN/ACSM/"
+    },
+    {
+      "name": "MAAP",
+      "node": "acsm",
+      "mount_name": "Data2",
+      "path": "CAMMPCAN/MAAP/"
+    },
+    {
+      "name": "CIMS",
+      "node": "cims",
+      "mount_name": "Data",
+      "path": "V2/"
+    },
+    {
+      "name": "NAIS",
+      "node": "nais",
+      "mount_name": "nais"
+    }
+  ],
+  "schedule": [
+    {
+      "command": "backup",
+      "frequency": "h"
+    },
+    {
+      "command": "basic_plot",
+      "frequency": "d",
+      "args": {
+        "dump_timeseries": true
+      }
+    },
+    {
+      "command": "backup_sync",
+      "frequency": "d"
+    }
+  ],
+  "email_from": "Airbox <robyn.schofield@aurora.aad.gov.au>",
+  "email_to": [
+    "robyn.schofield@unimelb.edu.au",
+    "ruhi.humphries@csiro.au",
+    "griffith@uow.edu.au",
+    "rgryan@student.unimelb.edu.au",
+    "montyjp@unimelb.edu.au",
+    "simon.alexander@aad.gov.au",
+    "john.french@aad.gov.au",
+    "alessandro.toffoli@unimelb.edu.au",
+    "clarem@uow.edu.au",
+    "andrew.bowie@utas.edu.au",
+    "michal.strzelec@utas.edu.au",
+    "z.ristovski@qut.edu.au",
+    "agw@ansto.gov.au",
+    "melita.keywood@csiro.au",
+    "b.miljevic@qut.edu.au",
+    "jared@jared.kiwi.nz",
+    "simon.alexander@aad.gov.au",
+    "agf@ansto.gov.au",
+    "szc@ansto.gov.au",
+    "ccaldow@uow.edu.au",
+    "dagmar.kubistin@gmx.de",
+    "iwadlow@student.unimelb.edu.au",
+    "jp.alroe@hdr.qut.edu.au",
+    "tony.morrison@mq.edu.au",
+    "peter.nelson@mq.edu.au",
+    "jennyf@uow.edu.au"
+  ],
+  "email_expeditioners": [
+    "robyn.schofield@aurora.aad.gov.au",
+    "dagmar.kubistin@aurora.aad.gov.au"
+  ],
+  "backup_dirs": [
+    "/media/aurora_ext_uom",
+    "/media/aurora_ext_aad"
+  ]
+}

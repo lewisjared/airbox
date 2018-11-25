@@ -1,6 +1,8 @@
 # AirBox Backups
 
-This repository contains helper scripts for performing backups of the airbox instruments.
+This repository contains helper commands for performing backups of the airbox instruments.
+
+These commands are managed by the `airbox` command line tool.
 
 ## Dependencies
 
@@ -12,31 +14,51 @@ are required:
 * rsync
 * cifs-utils
 
-
-## Concepts
-
-Within AirBox we have a number of instruments. Each instruments logs to a `Computer`
-
-
 ## Getting Started
 
-Update settings in script to match your email address and config file
-
-The script can then be copied into /etc/cron.hourly to be automatically run every hour. 
-
-```
-sudo copy airbox-backup.example /etc/cron.hourly/airbox-backup
-sudo chmod +x /etc/cron.hourly/airbox-backup
-```
-
-## Updating configuration for a new voyage
+This project uses a conda environment to manage the python packages required to run the airbox script. This conda
+environment requires bootstrapping before use.
 
 ```
-ssh airbox@airbox
+conda env create -n airbox python=3.6
+conda install
+conda activate airbox
+cd airbox
+python setup.py develop
+```
+
+To run the `airbox` command line tool, `conda activate airbox` must be called to ensure the correct version of python is
+used. A configuration file is required to run any of the commands using the airbox tool. These config files are typically
+added to the repository in the `config/` directory. See `config/airbox_config_v1.json` for an example. The configuration
+file to use is specified using the `--config` argument. Alternatively, the configuration filename can be specified using
+the `AIRBOX_CONFIG` environment variable.
+
+See `airbox -h` for a list of commands which can be run. To see more information about a command, including a list
+ of possible arguments add -h after the command.
+
+```bash
+airbox backup -h
+```
+
+```bash
 sudo /home/airbox/miniconda3/envs/airbox/bin/python airbox/cli.py --config config/airbox_config_v1.json install
 ```
 
 
+## Updating configuration for a new voyage
+
+```bash
+export AURORA_CONFIG=~/airbox/config/airbox_config_v1.json
+./scripts/aurora_unmount_drives.sh
+sudo mv /var/log/airbox.log /var/log/airbox_v1.log
+
+# REMOVE and replace the external harddrives
+
+export AURORA_CONFIG=~/airbox/config/airbox_config_v2.json
+./scripts/aurora_remount_drives.sh
+```
+
+Be careful with the v1 and v2's. v1 is the current voyage and v2 is the next voyage.
 
 ## Troubleshooting
 

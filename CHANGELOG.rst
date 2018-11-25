@@ -4,6 +4,8 @@ Changelog
 master
 ------
 
+- Shifting mountpoints to /etc/fstab rather than trying to mount them during the backups
+- Added `create_mounts` and `print_fstab` for managing the mounting of folders
 
 0.1.2
 -----

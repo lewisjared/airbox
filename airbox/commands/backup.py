@@ -17,38 +17,17 @@ def is_mount_point(dir_name):
     return res.returncode == 0
 
 
-def mount_dir(ip_or_hostname, mount_name, dest, passwd=None, **kwargs):
-    try:
-        if not exists(dest):
-            makedirs(dest)
-    except FileExistsError:
-        logger.warning('os.path.exists failed for {}'.format(dest))
-
-    if passwd is not None:
-        kwargs['pass'] = passwd
-
-    opts = ['{}={}'.format(k, kwargs[k]) for k in kwargs]
-    mount_path = '//{}/{}'.format(ip_or_hostname, mount_name)
-
-    logger.info('Attempting to create new mount: {} => {}'.format(ip_or_hostname, mount_name))
-    run_command(['mount', mount_path, dest, '-o', ','.join(opts)])
-    logger.info('Created mount point: ' + mount_path)
-
-
 def run_instr_backup(instr):
     """
     Runs the backups for a single instrument
+
     :param instr: A dictionary containing
     :return: The number of files modified/added by the rsync command
     """
-    node = instr['node']
-
-    # Ensure that the directory is mounted
     source = join(ROOT_MOUNT_POINT, instr['node']['name'], instr['mount_name']) + '/'
     dest = get_instr_dir(instr['name'])
-    if not is_mount_point(source):
-        mount_dir(node['ip'], instr['mount_name'], source, user=node['user'], passwd=node['pass'])
-        assert is_mount_point(source)
+
+    assert is_mount_point(source)
 
     logger.info('Backing up {} to {}'.format(source, dest))
 

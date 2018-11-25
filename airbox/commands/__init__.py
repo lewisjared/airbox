@@ -10,7 +10,9 @@ from logging import getLogger
 from .backup import BackupCommand
 from .backup_sync import BackupSyncCommand
 from .basic_plot import BasicPlotCommand
+from .create_mounts import CreateMountsCommand
 from .install import InstallCommand
+from .print_fstab import PrintFstabCommand
 from .run_schedule import RunScheduleCommand
 from .spectronus_subset import SpectronusSubsetCommand
 from .subset import SubsetCommand
@@ -22,7 +24,9 @@ _commands = [
     BackupCommand(),
     BackupSyncCommand(),
     BasicPlotCommand(),
+    CreateMountsCommand(),
     InstallCommand(),
+    PrintFstabCommand(),
     RunScheduleCommand(),
     SpectronusSubsetCommand(),
     SubsetCommand()
