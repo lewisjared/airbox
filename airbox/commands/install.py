@@ -30,11 +30,12 @@ class InstallCommand(BaseCommand):
 
     def run(self):
         out_fname = '/etc/cron.d/airbox'
+        log_fname = config['log_file'].replace('%', '\\%')
         script = CRON_SCIPT.format(
             python=abspath(sys.executable),
             cli_script=abspath(sys.argv[0]),
             config_fname=abspath(config['config']),
-            log_file=abspath(config['log_file'])
+            log_file=abspath(log_fname)
         )
         logger.info('Write the following lines to {}. Then ensure that {} is executable'.format(out_fname, out_fname))
 

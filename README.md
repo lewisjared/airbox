@@ -64,7 +64,7 @@ $ sudo mount -a
 
 Finally, the scheduler can be installed to automatically run every hour using:
 ```bash
-airbox install > /etc/cron.d/airbox
+airbox install | sudo tee /etc/cron.d/airbox
 sudo +x /etc/cron.d/airbox
 ```
 
