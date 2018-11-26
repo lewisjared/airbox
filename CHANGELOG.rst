@@ -4,6 +4,8 @@ Changelog
 master
 ------
 
+- Default logs to a /var/log/airbox folder
+
 0.2.2
 -----
 

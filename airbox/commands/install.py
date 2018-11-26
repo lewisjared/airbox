@@ -26,7 +26,7 @@ class InstallCommand(BaseCommand):
                                help="Filename where the logs from the scheduler are written. This file is appended to "
                                     "on every invocation. This can include shell commands such as `date`. Defaults to "
                                     '/var/log/airbox_`date "+%%Y-%%m-%%d"`.log which creates a new file every day.',
-                               default='/var/log/airbox_`date "+%Y-%m-%d"`.log')
+                               default='/var/log/airbox/airbox_`date "+%Y-%m-%d"`.log')
 
     def run(self):
         out_fname = '/etc/cron.d/airbox'
