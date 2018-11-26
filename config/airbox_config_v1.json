@@ -91,7 +91,8 @@
       "name": "MAXDOAS",
       "node": "maxdoas",
       "mount_name": "Data",
-      "path": "v1_Oct2018/"
+      "path": "v1_Oct2018/",
+      "extra": "--include=*.tar.gz --exclude=SP??????"
     },
     {
       "name": "MiniMPL",

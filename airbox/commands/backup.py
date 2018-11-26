@@ -37,6 +37,10 @@ def run_instr_backup(instr):
         '--no-group',
     ]
 
+    # Add in extra args
+    if 'extra' in instr:
+        rsync_args.extend(instr['extra'].split())
+
     if 'filter' in instr:
         rsync_args.extend([
             '--include={}'.format(instr['filter']),
