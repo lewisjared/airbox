@@ -1,6 +1,5 @@
 from logging import getLogger
-from os import makedirs
-from os.path import exists, join
+from os.path import join
 
 from airbox import config
 from airbox.dir import get_instr_dir
@@ -40,8 +39,8 @@ def run_instr_backup(instr):
 
     if 'filter' in instr:
         rsync_args.extend([
-            '--include="{}"'.format(instr['filter']),
-            '--exclude="*"'
+            '--include={}'.format(instr['filter']),
+            '--exclude=*'
         ])
 
     command_args = ['rsync', *rsync_args, source + p, dest]

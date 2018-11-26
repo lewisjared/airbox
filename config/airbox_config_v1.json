@@ -72,7 +72,8 @@
     {
       "name": "Ozone",
       "node": "ozone",
-      "mount_name": "iPort"
+      "mount_name": "iPort",
+      "filter": "49i 101718 0443 AA.dat"
     },
     {
       "name": "Spectronus",
