@@ -5,6 +5,7 @@ master
 ------
 
 - Default logs to a /var/log/airbox folder
+- Added script for tar'ing MAXDOAS spectra
 
 0.2.2
 -----

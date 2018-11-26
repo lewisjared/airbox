@@ -73,3 +73,9 @@ class ConfigStore(object):
         """
         for k, v in args._get_kwargs():
             self._config[k] = v
+
+    def get_instrument(self, instr_name):
+        for n in self['instruments']:
+            if n['name'] == instr_name:
+                return n
+        raise ValueError('Could not find configuration for instrument: "{}"'.format(instr_name))
