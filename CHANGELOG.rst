@@ -4,6 +4,11 @@ Changelog
 master
 ------
 
+0.2.2
+-----
+
+- Don't add additional quote marks to rsync commands
+
 0.2.1
 -----
 
