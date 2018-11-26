@@ -14,6 +14,7 @@ sudo mount /media/aurora_ext_aad
 sudo mount /media/aurora_ext_uom
 
 echo "Installing scheduler"
-sudo /home/airbox/miniconda3/envs/airbox/bin/python /home/airbox/airbox/cli.py install
+airbox install | sudo tee /etc/cron.d/airbox
+sudo +x /etc/cron.d/airbox
 
 echo "The airbox scheduler has been reenabled."

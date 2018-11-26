@@ -14,7 +14,7 @@ sudo umount /media/aurora_ext_aad
 sudo umount /media/aurora_ext_uom
 
 echo "Uninstalling scheduler"
-sudo rm /etc/cron.hourly/airbox
+sudo rm /etc/cron.d/airbox
 
 echo "Drives can now be removed. Replace with new drives and run 'aurora_remount_drives.sh' with the new configuration file"
 echo "The airbox scheduler has been disabled until 'aurora_remount_drives.sh' has been called."
