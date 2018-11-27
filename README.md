@@ -89,10 +89,19 @@ Be careful with the v1 and v2's. v1 is the current voyage and v2 is the next voy
 ## Commands
 
 
-
+## Development setup
+Airbox isn't connected to the internet most of the time so deploying code can be difficult. In the case where the 
+airbox server can be accessed, rsync can be used to copy the code from your machine to the server
+```bash
+rsync -avC --delete --exclude __pycache__ ~/code/airbox/airbox/ airbox:~/airbox 
+```
+This assumes that the root directory for this repository is `~/code/airbox` on the local machine, the target destination
+is `/home/airbox/airbox` and you have added the host airbox to your `~/.ssh/config` file, otherwise you need to specify 
+the username (`airbox`) and ip address. On the Aurora Australis the IP address for the airbox server is `147.66.74.71`.
 
 ## Troubleshooting
 
 If the mounts to a computer is not working try the following steps:
-* Ensure the username, password and IP address are correct.
+* Ensure the username, password and IP address are correct. You should be able to login to remote desktop using these
+credentials.
 * In "Network and Sharing Center" > "Advanced sharing settings", ensure that "File and Printing sharing" is enabled.
