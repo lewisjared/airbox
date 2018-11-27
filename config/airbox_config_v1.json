@@ -133,7 +133,8 @@
       "name": "Neph",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/Neph/"
+      "path": "201819_CAMMPCAN/Neph/",
+      "filter": "*.txt"
     },
     {
       "name": "AerosolTempRH",
