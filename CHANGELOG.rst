@@ -6,6 +6,7 @@ master
 
 - Default logs to a /var/log/airbox folder
 - Added script for tar'ing MAXDOAS spectra
+- Sync between drives for `backup_sync`
 
 0.2.2
 -----

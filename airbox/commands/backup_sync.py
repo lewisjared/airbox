@@ -7,7 +7,7 @@ from .base import BaseCommand
 logger = getLogger()
 
 
-def run_backup(dest):
+def run_backup(source, dest):
     """
     Backs up the shareddrive to 2 duplicate external harddrives
 
@@ -18,13 +18,13 @@ def run_backup(dest):
     :return: The number of files modified/added by the rsync command
     """
 
-    source = config['target']
     logger.info('Backing up {} to {}'.format(source, dest))
 
     rsync_args = [
         '-aiz',
         '--no-owner',
         '--no-group',
+        '--no-perms',
         '--exclude',
         'plots'
     ]
@@ -71,5 +71,5 @@ class BackupSyncCommand(BaseCommand):
     help = 'Syncronise the external harddrives with the shared drive'
 
     def run(self):
-        for dest in config['backup_dirs']:
-            run_backup(dest)
+        run_backup(config['target'], config['backup_dirs'][0])
+        run_backup(config['backup_dirs'][0], config['backup_dirs'][1])
