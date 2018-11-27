@@ -7,6 +7,7 @@ master
 - Removed verbose flags from backup_maxdoas.sh script
 - Minor changes to logging
 - install command now runs script in verbose mode for better debugging once I leave the ship
+- Append current log to expeditioner email
 
 0.2.4
 -----

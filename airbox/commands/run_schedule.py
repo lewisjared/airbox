@@ -50,6 +50,17 @@ class RunScheduleCommand(BaseCommand):
             except:
                 exc_info = sys.exc_info()
                 logger.exception('Command failed. Emailing expeds')
-                sendmail(config['email_expeditioners'], "Scheduled command failed: {}".format(s['command']),
-                         "{}. Check the airbox log (typically in /var/log/airbox/) on the airbox server for more "
-                         "information.".format(exc_info[1]))
+
+                content = "{}. Check the airbox log (typically in /var/log/airbox/) on the airbox server for more " \
+                          "information.".format(exc_info[1])
+
+                try:
+                    today = datetime.now().date()
+                    log_fname = '/var/log/airbox/airbox_{}-{:02}-{:02}.log'.format(today.year, today.month, today.day)
+                    logger.info('Trying to open log file: {}'.format(log_fname))
+                    log_file = open(log_fname).read()
+                    content += "/n/n" + log_file
+                except FileExistsError:
+                    logger.warning('Cant find log file')
+
+                sendmail(config['email_expeditioners'], "Scheduled command failed: {}".format(s['command']), content)
