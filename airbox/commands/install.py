@@ -11,7 +11,7 @@ logger = getLogger(__name__)
 CRON_SCIPT = """# /etc/cron.d/airbox: crontab entries for the airbox package
 # This was installed using the airbox cli tool: run `airbox install` again with a different configuration to change
 
-0 * * * *   airbox    /home/airbox/airbox/scripts/backup_maxdoas.sh {maxdoas_path} >> {log_file} 2>&1
+0 */3 * * *   airbox    /home/airbox/airbox/scripts/backup_maxdoas.sh {maxdoas_path} >> {log_file} 2>&1
 15 * * * *  airbox    {python} {cli_script} --config {config_fname} run_schedule >> {log_file} 2>&1
 """
 
