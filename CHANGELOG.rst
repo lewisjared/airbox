@@ -4,6 +4,8 @@ Changelog
 master
 ------
 
+- Removed verbose flags from backup_maxdoas.sh script
+
 0.2.4
 -----
 - Additional filters on synced backups

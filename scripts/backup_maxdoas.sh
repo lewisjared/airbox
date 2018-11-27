@@ -12,18 +12,19 @@ function mod_time() {
 
 for m_dir in $ROOT_DIR/SP*/*; do
     for d_dir in $m_dir/SP??????; do
+        echo "Checking if need to regenerate $d_dir"
         if [ -f $d_dir.tar.gz ]; then
             # Check modified times
             dir_modtime=`mod_time $d_dir`
             f_modtime=`mod_time $d_dir.tar.gz`
-            echo $dir_modtime $f_modtime
             if [[ $dir_modtime > $f_modtime ]]; then
                 echo "Newer files exist. Creating archive $d_dir.tar.gz"
-                tar -C $m_dir -zcvf $d_dir.tar.gz `basename $d_dir`
+                tar -C $m_dir -zcf $d_dir.tar.gz `basename $d_dir`
             fi
         else
             echo "Creating archive $d_dir.tar.gz"
-            tar -C $m_dir -zcvf $d_dir.tar.gz `basename $d_dir`
+            tar -C $m_dir -zcf $d_dir.tar.gz `basename $d_dir`
         fi
     done
 done
+echo "Finished creating tar.gz files for MAXDOAS"
