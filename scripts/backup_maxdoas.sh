@@ -19,11 +19,11 @@ for m_dir in $ROOT_DIR/SP*/*; do
             echo $dir_modtime $f_modtime
             if [[ $dir_modtime > $f_modtime ]]; then
                 echo "Newer files exist. Creating archive $d_dir.tar.gz"
-                tar -C $m_dir -zcf $d_dir.tar.gz $d_dir
+                tar -C $m_dir -zcvf $d_dir.tar.gz `basename $d_dir`
             fi
         else
             echo "Creating archive $d_dir.tar.gz"
-            tar -C $m_dir -zcf $d_dir.tar.gz $d_dir
+            tar -C $m_dir -zcvf $d_dir.tar.gz `basename $d_dir`
         fi
     done
 done
