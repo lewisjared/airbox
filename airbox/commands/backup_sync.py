@@ -25,8 +25,10 @@ def run_backup(source, dest):
         '--no-owner',
         '--no-group',
         '--no-perms',
-        '--exclude',
-        'plots'
+        '--delete',
+        '--exclude=plots',
+        '--include=*.tar.gz',
+        '--exclude=SP??????'
     ]
 
     command_args = ['rsync', *rsync_args, source, dest]
