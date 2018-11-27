@@ -6,7 +6,7 @@ from airbox.dir import get_instr_dir
 from airbox.process import run_command, FAILED_CMD_MSG
 from .base import BaseCommand
 
-logger = getLogger('airbox')
+logger = getLogger(__name__)
 
 ROOT_MOUNT_POINT = '/mnt/airbox'
 

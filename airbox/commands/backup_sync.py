@@ -4,7 +4,7 @@ from airbox import config
 from airbox.process import run_command, FAILED_CMD_MSG
 from .base import BaseCommand
 
-logger = getLogger()
+logger = getLogger(__name__)
 
 
 def run_backup(source, dest):
