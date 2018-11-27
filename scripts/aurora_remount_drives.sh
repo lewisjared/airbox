@@ -3,9 +3,8 @@
 #
 # Note that the configuration file used *must* be specified using the AIRBOX_CONFIG environment variable.
 # This command can be run using the following command
-# AIRBOX_CONFIG=~/airbox/config/airbox_config_v1.json ./scripts/unmount_drives.sh
+# AIRBOX_CONFIG=~/airbox/config/airbox_config_v1.json ./scripts/remount_drives.sh
 
-# NOTE: The python executable and directory to the source code used is hardcoded
 
 echo "Using configuration file: $AIRBOX_CONFIG"
 

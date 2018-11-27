@@ -6,7 +6,11 @@
 # This command can be run using the following command
 # AIRBOX_CONFIG=~/airbox/config/airbox_config_v1.json ./scripts/unmount_drives.sh
 
-echo "Running final sync"
+echo "Using configuration file: $AIRBOX_CONFIG"
+
+echo "Running final backup and sync"
+./backup_maxdoas.sh
+airbox backup
 airbox backup_sync
 
 echo "Unmounting drives"
