@@ -1,10 +1,79 @@
 {
   "target": "/mnt/aurora/data/v2",
+  "nodes": [
+    {
+      "name": "ozone",
+      "ip": "147.66.74.70",
+      "user": "CAC",
+      "pass": "gone-fishing"
+    },
+    {
+      "name": "maxdoas",
+      "ip": "147.66.74.97",
+      "user": "localadmin",
+      "pass": "password"
+    },
+    {
+      "name": "spectronus",
+      "ip": "147.66.74.24",
+      "user": "Ecotech",
+      "pass": "airbox"
+    },
+    {
+      "name": "tekran",
+      "ip": "147.66.74.100",
+      "user": "2537X",
+      "pass": ""
+    },
+    {
+      "name": "minimpl",
+      "ip": "147.66.74.117",
+      "user": "mpluser",
+      "pass": "mpluser"
+    },
+    {
+      "name": "ansto",
+      "ip": "147.66.74.101",
+      "user": "ANSTO",
+      "pass": "password"
+    },
+    {
+      "name": "acsm",
+      "ip": "147.66.74.119",
+      "user": "user",
+      "pass": "TofPass"
+    },
+    {
+      "name": "csiro",
+      "ip": "147.66.74.104",
+      "user": "acc-field",
+      "pass": "password"
+    },
+    {
+      "name": "ccn",
+      "ip": "147.66.74.103",
+      "user": "aaeon",
+      "pass": "password"
+    },
+    {
+      "name": "cims",
+      "ip": "147.66.74.196",
+      "user": "tofuser",
+      "pass": "cimsuser"
+    },
+    {
+      "name": "nais",
+      "ip": "147.66.74.102",
+      "user": "NAIS",
+      "pass": "nais21"
+    }
+  ],
   "instruments": [
     {
       "name": "Ozone",
       "node": "ozone",
-      "mount_name": "iPort"
+      "mount_name": "iPort",
+      "filter": "49i 112718 2056 AA.dat"
     },
     {
       "name": "Spectronus",
@@ -15,14 +84,15 @@
     {
       "name": "Tekran",
       "node": "tekran",
-      "mount_name": "HgLoggerPlus",
-      "path": "1/Aurora Australis/"
+      "mount_name": "Data",
+      "path": "v1/"
     },
     {
       "name": "MAXDOAS",
       "node": "maxdoas",
       "mount_name": "Data",
-      "path": "v2_Oct2018/"
+      "path": "v2_Dec2018/",
+      "extra": "--include=*.tar.gz --exclude=SP??????"
     },
     {
       "name": "MiniMPL",
@@ -45,49 +115,53 @@
       "name": "CPC3776",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/CPC3776/"
+      "path": "201819_CAMMPCAN/CPC3776/v2/"
     },
     {
       "name": "CPC3772",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/CPC3772/"
+      "path": "201819_CAMMPCAN/CPC3772/v2/"
     },
     {
       "name": "SMPS",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/SMPS/"
+      "path": "201819_CAMMPCAN/SMPS/v2/"
     },
     {
       "name": "Neph",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/Neph/"
+      "path": "201819_CAMMPCAN/Neph/v2/",
+      "filter": "*.txt"
     },
     {
       "name": "AerosolTempRH",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "HMP/"
+      "path": "HMP/",
+      "filter": "*.log"
     },
     {
       "name": "CCN",
       "node": "ccn",
       "mount_name": "dmt",
-      "path": "CCN Data/"
+      "path": "CCN Data/",
+      "extra": "--exclude=2018_AA --exclude=CAMPCAN_UTC10 --delete"
     },
     {
       "name": "ACSM",
       "node": "acsm",
       "mount_name": "Data2",
-      "path": "CAMMPCAN/ACSM/"
+      "path": "CAMMPCAN/ACSM/V2/"
     },
     {
       "name": "MAAP",
       "node": "acsm",
       "mount_name": "Data2",
-      "path": "CAMMPCAN/MAAP/"
+      "path": "CAMMPCAN/MAAP/",
+      "extra": "--exclude V*"
     },
     {
       "name": "CIMS",
@@ -98,7 +172,9 @@
     {
       "name": "NAIS",
       "node": "nais",
-      "mount_name": "nais"
+      "mount_name": "nais",
+      "path": "NAIS-Aurora",
+      "extra": "--exclude V*"
     }
   ],
   "schedule": [
@@ -118,7 +194,7 @@
       "frequency": "d"
     }
   ],
-  "email_from": "Airbox <robyn.schofield@aurora.aad.gov.au>",
+  "email_from": "Jared Lewis <jared.lewis@aurora.aad.gov.au>",
   "email_to": [
     "robyn.schofield@unimelb.edu.au",
     "ruhi.humphries@csiro.au",
@@ -136,7 +212,7 @@
     "melita.keywood@csiro.au",
     "b.miljevic@qut.edu.au",
     "jared@jared.kiwi.nz",
-    "simon.alexander@aad.gov.au",
+    "simon.alexander@aurora.aad.gov.au",
     "agf@ansto.gov.au",
     "szc@ansto.gov.au",
     "ccaldow@uow.edu.au",
