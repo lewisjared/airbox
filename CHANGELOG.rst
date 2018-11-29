@@ -4,6 +4,7 @@ Changelog
 master
 ------
 
+- Create destination directories if they don't exist
 
 v1.0.1
 ------

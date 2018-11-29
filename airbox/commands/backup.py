@@ -1,5 +1,6 @@
 from logging import getLogger
-from os.path import join
+from os import makedirs
+from os.path import join, exists
 
 from airbox import config
 from airbox.dir import get_instr_dir
@@ -25,6 +26,9 @@ def run_instr_backup(instr):
     """
     source = join(ROOT_MOUNT_POINT, instr['node']['name'], instr['mount_name']) + '/'
     dest = get_instr_dir(instr['name'])
+
+    if not exists(dest):
+        makedirs(dest)
 
     assert is_mount_point(source)
 
