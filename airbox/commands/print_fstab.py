@@ -24,7 +24,7 @@ class PrintFstabCommand(BaseCommand):
                 'gid': 1000,
                 'iocharset': 'utf8'
             }
-            opts = ','.join(['{}={}'.format(k, kwargs[k]) for k in kwargs]) + ',noperm'
+            opts = ','.join(['{}={}'.format(k, kwargs[k]) for k in kwargs]) + ',noperm,nofail'
             mount_path = '//{}/{}'.format(node['ip'], instr['mount_name'])
             lines.append('\t'.join([mount_path, source, "cifs", opts, "0", "0"]))
 
