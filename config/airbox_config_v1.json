@@ -84,8 +84,8 @@
     {
       "name": "Tekran",
       "node": "tekran",
-      "mount_name": "HgLoggerPlus",
-      "path": "1/Aurora Australis/"
+      "mount_name": "Data",
+      "path": "v1/"
     },
     {
       "name": "MAXDOAS",
@@ -98,7 +98,8 @@
       "name": "MiniMPL",
       "node": "minimpl",
       "mount_name": "data",
-      "filter": "*.mpl"
+      "filter": "*.mpl",
+      "path": "2018_AA/v1/"
     },
     {
       "name": "Radon",
@@ -109,56 +110,56 @@
       "name": "WeatherStation",
       "node": "ansto",
       "mount_name": "UMB-Config",
-      "filter": "*Values.txt"
+      "path": "2018_AA/v1/"
     },
     {
       "name": "CPC3776",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/CPC3776/"
+      "path": "201819_CAMMPCAN/CPC3776/v1/"
     },
     {
       "name": "CPC3772",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/CPC3772/"
+      "path": "201819_CAMMPCAN/CPC3772/v1/"
     },
     {
       "name": "SMPS",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/SMPS/"
+      "path": "201819_CAMMPCAN/SMPS/v1/"
     },
     {
       "name": "Neph",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/Neph/",
+      "path": "201819_CAMMPCAN/Neph/v1/",
       "filter": "*.txt"
     },
     {
       "name": "AerosolTempRH",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "HMP/"
+      "path": "HMP/v1/"
     },
     {
       "name": "CCN",
       "node": "ccn",
       "mount_name": "dmt",
-      "path": "CCN Data/"
+      "path": "CCN Data/2018_AA/V1/"
     },
     {
       "name": "ACSM",
       "node": "acsm",
       "mount_name": "Data2",
-      "path": "CAMMPCAN/ACSM/"
+      "path": "CAMMPCAN/ACSM/V1/"
     },
     {
       "name": "MAAP",
       "node": "acsm",
       "mount_name": "Data2",
-      "path": "CAMMPCAN/MAAP/"
+      "path": "CAMMPCAN/MAAP/V1/"
     },
     {
       "name": "CIMS",
@@ -169,7 +170,9 @@
     {
       "name": "NAIS",
       "node": "nais",
-      "mount_name": "nais"
+      "mount_name": "nais",
+      "path": "NAIS-Aurora/V1",
+      "filter": "*.log"
     }
   ],
   "schedule": [
