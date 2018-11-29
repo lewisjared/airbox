@@ -4,7 +4,12 @@ Changelog
 master
 ------
 
+
+v1.0.1
+------
+
 - Updated documentation
+- Changed v2 configuration to reflect path changes
 
 v1.0.0
 ------
