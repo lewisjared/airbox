@@ -4,10 +4,6 @@ airbox
 A set of utilities and a command line tool for managing AirBox and the
 instruments in it.
 
-Install using
-
-    pip install airbox
-
 Although it is likely to be only installed on one computer!
 
 """

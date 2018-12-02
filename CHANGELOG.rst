@@ -7,6 +7,7 @@ master
 - Create destination directories if they don't exist
 - Add MIT license
 - Fixed an off by one error when calculating the number of modified files
+- Added sphinx docs
 
 v1.0.1
 ------
