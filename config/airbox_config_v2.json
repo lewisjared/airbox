@@ -79,7 +79,7 @@
       "name": "Spectronus",
       "node": "spectronus",
       "mount_name": "Data",
-      "path": "1810_AuroraAustralis_V2/"
+      "path": "1812_AuroraAustralis_V2/"
     },
     {
       "name": "Tekran",
@@ -133,7 +133,7 @@
       "name": "Neph",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/Neph/v2/",
+      "path": "201819_CAMMPCAN/Neph/",
       "filter": "*.txt"
     },
     {
@@ -148,7 +148,7 @@
       "node": "ccn",
       "mount_name": "dmt",
       "path": "CCN Data/",
-      "extra": "--exclude=2018_AA --exclude=CAMPCAN_UTC10 --delete"
+      "extra": "--exclude=2018_AA --exclude Old_data --exclude=CAMPCAN_UTC10 --delete"
     },
     {
       "name": "ACSM",

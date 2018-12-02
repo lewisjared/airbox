@@ -62,7 +62,7 @@ def run_instr_backup(instr):
             raise OSError("Failed rsync command: {}".format(res.args))
 
     # Count the number of lines in STDOUT - this corresponds to the number of files added/modified
-    num_files_modified = len(res.stdout.decode().split('\n'))
+    num_files_modified = len(res.stdout.decode().split('\n')) - 1
     logger.info('{} files added or modified'.format(num_files_modified))
 
     return num_files_modified
@@ -97,7 +97,7 @@ class BackupCommand(BaseCommand):
         for i in config['instruments']:
             try:
                 num_files = run_instr_backup(i)
-                if num_files == 0:
+                if num_files == 0 and i['name'] != 'Neph':
                     logger.error('No files backed up. Marking instrument as failed')
                     failed_instr.append(i)
             except:
