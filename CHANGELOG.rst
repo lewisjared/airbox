@@ -5,6 +5,7 @@ master
 ------
 
 - Create destination directories if they don't exist
+- Add MIT license
 
 v1.0.1
 ------
