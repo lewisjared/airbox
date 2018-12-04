@@ -8,6 +8,8 @@ master
 - Add MIT license
 - Fixed an off by one error when calculating the number of modified files
 - Added sphinx docs
+- Added configuration for v3 and v4
+- Minor fixes before v2
 
 v1.0.1
 ------
