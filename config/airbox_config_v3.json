@@ -1,5 +1,5 @@
 {
-  "target": "/mnt/aurora/data/v2",
+  "target": "/mnt/aurora/data/v3",
   "nodes": [
     {
       "name": "ozone",
@@ -73,25 +73,25 @@
       "name": "Ozone",
       "node": "ozone",
       "mount_name": "iPort",
-      "filter": "49i 112718 2056 AA.dat"
+      "filter": "***** Need to update ******"
     },
     {
       "name": "Spectronus",
       "node": "spectronus",
       "mount_name": "Data",
-      "path": "1812_AuroraAustralis_V2/"
+      "path": "1901_AuroraAustralis_V3/"
     },
     {
       "name": "Tekran",
       "node": "tekran",
       "mount_name": "Data",
-      "path": "v2/"
+      "path": "v3/"
     },
     {
       "name": "MAXDOAS",
       "node": "maxdoas",
       "mount_name": "Data",
-      "path": "v2_Dec2018/",
+      "path": "v3_Jan2019/",
       "extra": "--include=*.tar.gz --exclude=SP??????"
     },
     {
@@ -115,19 +115,19 @@
       "name": "CPC3776",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/CPC3776/v2/"
+      "path": "201819_CAMMPCAN/CPC3776/v3/"
     },
     {
       "name": "CPC3772",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/CPC3772/v2/"
+      "path": "201819_CAMMPCAN/CPC3772/v3/"
     },
     {
       "name": "SMPS",
       "node": "csiro",
       "mount_name": "Data",
-      "path": "201819_CAMMPCAN/SMPS/v2/"
+      "path": "201819_CAMMPCAN/SMPS/v3/"
     },
     {
       "name": "Neph",
@@ -154,7 +154,7 @@
       "name": "ACSM",
       "node": "acsm",
       "mount_name": "Data2",
-      "path": "CAMMPCAN/ACSM/V2/"
+      "path": "CAMMPCAN/ACSM/V3/"
     },
     {
       "name": "MAAP",
@@ -167,7 +167,7 @@
       "name": "CIMS",
       "node": "cims",
       "mount_name": "Data",
-      "path": "V2/"
+      "path": "V3/"
     },
     {
       "name": "NAIS",

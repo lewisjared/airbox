@@ -74,4 +74,4 @@ class BackupSyncCommand(BaseCommand):
 
     def run(self):
         run_backup(config['target'], config['backup_dirs'][0])
-        run_backup(config['backup_dirs'][0], config['backup_dirs'][1])
+        run_backup(config['backup_dirs'][0] + '/', config['backup_dirs'][1])
