@@ -10,12 +10,19 @@ Welcome to Airbox's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Getting Started
+
+    getting_started
+
 
 .. toctree::
     :maxdepth: 2
     :caption: Versions
 
     changelog
+
 
 
 Indices and tables
