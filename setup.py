@@ -16,7 +16,7 @@ from airbox import __version__
 
 root_dir = abspath(dirname(__file__))
 
-with open(join(root_dir, "README.md"), "r") as f:
+with open(join(root_dir, "README.rst"), "r") as f:
     readme = f.read()
 
 setup(
