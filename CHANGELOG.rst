@@ -4,6 +4,9 @@ Changelog
 master
 ------
 
+v1.0.2
+------
+
 - Create destination directories if they don't exist
 - Add MIT license
 - Fixed an off by one error when calculating the number of modified files
